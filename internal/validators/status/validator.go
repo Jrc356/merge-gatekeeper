@@ -104,6 +104,7 @@ func (sv *statusValidator) Validate(ctx context.Context) (validators.Status, err
 		totalJobs:    make([]string, 0, len(ghaStatuses)),
 		completeJobs: make([]string, 0, len(ghaStatuses)),
 		errJobs:      make([]string, 0, len(ghaStatuses)/2),
+		ignoredJobs:  sv.ignoredJobs,
 		succeeded:    true,
 	}
 

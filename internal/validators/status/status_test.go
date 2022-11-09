@@ -25,12 +25,21 @@ func Test_status_Detail(t *testing.T) {
 			},
 			want: `1 out of 3
 
-  Total job count:     3
-    jobs: ["job-1" "job-2" "job-3"]
+  Total job count: 3
+    jobs: 
+      - job-1
+      - job-2
+      - job-3
   Completed job count: 1
-    jobs: ["job-2"]
-  Failed job count:    1
-    jobs: ["job-3"]
+    jobs: 
+      - job-2
+  Incomplete job count: 1
+    jobs: 
+      - job-1
+  Failed job count: 1
+    jobs: 
+      - job-3
+
 `,
 		},
 		"return detail with ignored jobs input": {
@@ -54,16 +63,29 @@ func Test_status_Detail(t *testing.T) {
 			},
 			want: `2 out of 4
 
-  Total job count:     4
-    jobs: ["job-1" "job-2" "job-3" "job-4"]
+  Total job count: 4
+    jobs: 
+      - job-1
+      - job-2
+      - job-3
+      - job-4
   Completed job count: 2
-    jobs: ["job-2" "job-4"]
-  Failed job count:    1
-    jobs: ["job-3"]
-
+    jobs: 
+      - job-2
+      - job-4
+  Incomplete job count: 1
+    jobs: 
+      - job-1
+  Failed job count: 1
+    jobs: 
+      - job-3
 
   --
-  Ignored jobs: ["job-4"]`,
+
+  Ignored jobs: 
+    - job-4
+
+`,
 		},
 		"return detail when totalJobs and completeJobs is empty": {
 			s: &status{
@@ -72,13 +94,14 @@ func Test_status_Detail(t *testing.T) {
 			},
 			want: `0 out of 0
 
-  Total job count:     0
+  Total job count: 0
     jobs: []
   Completed job count: 0
     jobs: []
-  Failed job count:    0
+  Incomplete job count: 0
     jobs: []
-`,
+  Failed job count: 0
+    jobs: []`,
 		},
 	}
 
